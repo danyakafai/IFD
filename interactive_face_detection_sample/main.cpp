@@ -59,20 +59,20 @@ bool ParseAndCheckCommandLine(int argc, char *argv[]) {
         throw std::logic_error("Parameter -i is not set");
     }
     
-    //adds the string path of the Face Detection model - instead of having to input it in the command line. 
     if (FLAGS_m.empty()) {
-        FLAGS_m = "/opt/intel/InteractiveTest2/OptimizedModels/face-detection-adas-0001/face-detection-adas-0001.xml"; 
-    }
-    
-    //adds the string path of the Age/Gender model - instead of having to input it in the command line. 
-    if (FLAGS_m_ag.empty()) {
-	FLAGS_m_ag = "/opt/intel/InteractiveTest2/OptimizedModels/age-gender-recognition-retail-0013/age-gender-recognition-retail-0013.xml";
+	std::string path = (__FILE__);
+	FLAGS_m = path.substr(0, path.length() - 8) + "face-detection-adas-0001.xml";
     }
 
-    //adds the string path of the Emotion Recognition model - instead of having to input it in the command line.
+    if (FLAGS_m_ag.empty()) {
+	std::string path = (__FILE__);
+	FLAGS_m_ag = path.substr(0, path.length() - 8) + "age-gender-recognition-retail-0013.xml";
+    }
+
     if (FLAGS_m_em.empty()) {
-	FLAGS_m_em = "/opt/intel/InteractiveTest2/OptimizedModels/emotions-recognition-retail-0003/emotions-recognition-retail-0003.xml";
-    } 
+	std::string path = (__FILE__);
+	FLAGS_m_em = path.substr(0, path.length() - 8) + "emotions-recognition-retail-0003.xml";
+    }	
 
     if (FLAGS_n_ag < 1) {
         throw std::logic_error("Parameter -n_ag cannot be 0");
